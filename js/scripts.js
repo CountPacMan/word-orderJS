@@ -26,9 +26,15 @@ function getWordOrder(input) {
 
 
 jQuery(document).ready(function() {
-  $("#text").focus();
+  $("#words").focus();
   $("#word-order").submit(function(event) {
-    var word = $("#word").val();
+    var words = $("#words").val();
+    var order = getWordOrder(words);
+    
+    $("#order").text(order[0]);
+    for (var i = 1; i < order.length; i++) {
+      $("#order").append(", " + order[i]);
+    }
 
     $("#result").show();
     event.preventDefault();
