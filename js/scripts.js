@@ -1,28 +1,24 @@
 function getWordOrder(input) {
-  var word_order = {};
-  var split_input = input.toLowerCase().split(' ');
-
-  for (var i in split_input) {
-    if (!word_order.hasOwnProperty(split_input[i])) {
-      word_order[split_input[i]] = 1;
+  var splitInput = input.toLowerCase().split(' ');
+  var wordsPushed = [];
+  var sortedWords = [];
+  
+  for (var i in splitInput) {
+    if (wordsPushed.indexOf(splitInput[i]) === -1) {
+      wordsPushed.push(splitInput[i]);
+      sortedWords.push([splitInput[i], 1]);
     } else {
-      word_order[split_input[i]]++;
+      sortedWords[wordsPushed.indexOf(splitInput[i])][1]++;
     }
   }
-  
-  var sorted_words = [];
-  for (var word in word_order) {
-    sorted_words.push([word, word_order[word]]);
 
-  }
-
-  sorted_words.sort(function(word1, word2) {
+  sortedWords.sort(function(word1, word2) {
     return word2[1] - word1[1];
   });
 
   var final = [];
-  for (var i in sorted_words) {
-    final.push(sorted_words[i][0]);
+  for (var i in sortedWords) {
+    final.push(sortedWords[i][0]);
   }
 
   return final;
